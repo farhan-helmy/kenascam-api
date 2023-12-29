@@ -3,13 +3,25 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "generate": "drizzle-kit generate:sqlite",
+    "migrate": "bun src/db/migrate.ts"
   },
   "dependencies": {
+    "@elysiajs/bearer": "^0.8.0",
+    "@elysiajs/cookie": "^0.8.0",
+    "@elysiajs/cors": "^0.8.0",
+    "@elysiajs/eden": "^0.8.0",
+    "@elysiajs/jwt": "^0.8.0",
+    "@elysiajs/stream": "^0.8.0",
+    "@elysiajs/swagger": "^0.8.0",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "drizzle-orm": "^0.29.2",
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "drizzle-kit": "^0.20.9"
   },
   "module": "src/index.js"
 }
