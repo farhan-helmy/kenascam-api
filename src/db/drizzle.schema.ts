@@ -4,6 +4,7 @@ import { relations } from 'drizzle-orm';
 export const scams = sqliteTable('SCAM', {
     id: text('id'),
     name: text('name').notNull(),
+    description: text('description'),
     isApproved: integer('isApproved', { mode: 'boolean' }).default(false),
 })
 

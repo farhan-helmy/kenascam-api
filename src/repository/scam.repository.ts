@@ -1,5 +1,5 @@
 import { db } from "../db/drizzle.db"
-import { scams } from "../db/drizzle.schema"
+import { InsertScam, scams } from "../db/drizzle.schema"
 import { eq } from 'drizzle-orm';
 
 const findMany = async () => {
@@ -16,7 +16,12 @@ const findFirst = async ({ id }: { id: string }) => {
     })
 }
 
+const create = async (scam: InsertScam) => {
+    return await db.insert(scams).values(scam)
+}
+
 export const scamRepository = {
     findMany,
-    findFirst
+    findFirst,
+    create
 }
