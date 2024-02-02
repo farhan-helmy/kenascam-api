@@ -1,8 +1,8 @@
-import { Database } from "bun:sqlite";
-import { drizzle } from 'drizzle-orm/bun-sqlite';
-import { migrate } from "drizzle-orm/better-sqlite3/migrator";
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
+import { migrate } from "drizzle-orm/libsql/migrator";
 
-const sqlite = new Database('kenascam.sqlite');
-const db = drizzle(sqlite, { logger: true });
+const client = createClient({ url: process.env.TURSODB_URL! , authToken: process.env.TURSODB_TOKEN! });
+const db = drizzle(client, { logger: true });
 
 migrate(db, { migrationsFolder: "drizzle" });

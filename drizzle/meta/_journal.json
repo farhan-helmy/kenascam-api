@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1703806034963,
-      "tag": "0000_lonely_thundra",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1703814017925,
-      "tag": "0001_sweet_echo",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1703816783576,
-      "tag": "0002_simple_onslaught",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1703906843421,
-      "tag": "0003_fair_colossus",
+      "when": 1706803682320,
+      "tag": "0000_true_lionheart",
       "breakpoints": true
     }
   ]

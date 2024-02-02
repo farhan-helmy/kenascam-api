@@ -1,9 +1,10 @@
-import { Database } from "bun:sqlite";
-import { drizzle } from 'drizzle-orm/bun-sqlite';
+import { drizzle } from 'drizzle-orm/libsql';
+import { createClient } from '@libsql/client';
 import * as schema from "./drizzle.schema";
 
-const sqlite = new Database('kenascam.sqlite');
-export const db = drizzle(sqlite, {
+const client = createClient({ url: process.env.TURSODB_URL! , authToken: process.env.TURSODB_TOKEN! });
+
+export const db = drizzle(client, {
     logger: true,
     schema
 });

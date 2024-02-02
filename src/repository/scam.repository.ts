@@ -17,7 +17,7 @@ const findFirst = async ({ id }: { id: string }) => {
 }
 
 const create = async (scam: InsertScam) => {
-    return await db.insert(scams).values(scam)
+    return await db.insert(scams).values(scam).returning()
 }
 
 export const scamRepository = {
