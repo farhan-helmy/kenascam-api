@@ -3,6 +3,7 @@ import { scamRouter } from "./router/scam.router";
 import { imageRouter } from "./router/image.router";
 
 const app = new Elysia()
+  .get('/', () => 'Ok')
   .group('/scam', (app) =>
     app.use(scamRouter)
   )

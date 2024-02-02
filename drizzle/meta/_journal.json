@@ -8,6 +8,20 @@
       "when": 1706803682320,
       "tag": "0000_true_lionheart",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1706882385481,
+      "tag": "0001_odd_azazel",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706883414420,
+      "tag": "0002_gifted_magneto",
+      "breakpoints": true
     }
   ]
 }
