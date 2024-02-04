@@ -1,16 +1,16 @@
 import { createId } from "@paralleldrive/cuid2";
-import { commentData } from "../schema/comment.schema";
 import { categoryRepository } from "../repository/category.repository";
+import { categoryData } from "../schema/category.schema";
 
-const createCategory = async (categoryData: commentData) => {
-    const commentCreateRes = await categoryRepository.create({
+const createCategory = async (categoryData: categoryData) => {
+    const categoryCreateRes = await categoryRepository.create({
         id: createId(),
-        name: categoryData.nickname,
+        name: categoryData.name,
     })
 
-    console.log(commentCreateRes)
+    console.log(categoryCreateRes)
 
-    return commentCreateRes
+    return categoryCreateRes
 }
 
 export const categoryService = {
