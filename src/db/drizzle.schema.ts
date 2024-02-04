@@ -11,6 +11,7 @@ export const scams = sqliteTable('SCAM', {
 export const scamRelations = relations(scams, ({ many }) => ({
     images: many(images),
     scamToCategories: many(scamToCategories),
+    comments: many(comments),
 }))
 
 export const images = sqliteTable('IMAGE', {
@@ -22,6 +23,13 @@ export const images = sqliteTable('IMAGE', {
 export const categories = sqliteTable('CATEGORY', {
     id: text('id').primaryKey(),
     name: text('name').notNull().unique(),
+})
+
+export const comments = sqliteTable('COMMENT', {
+    id: text('id').primaryKey(),
+    nickname: text('nickname').notNull(),
+    content: text('content').notNull(),
+    scamId: text('scamId').notNull().references(() => scams.id),
 })
 
 export const categoriesRelations = relations(categories, ({ many }) => ({
@@ -52,3 +60,8 @@ export type InsertScam = typeof scams.$inferInsert
 
 export type SelectImage = typeof images.$inferSelect
 export type InsertImage = typeof images.$inferInsert
+
+export type SelectCategory = typeof categories.$inferSelect
+export type InsertCategory = typeof categories.$inferInsert
+
+export type InsertComment = typeof comments.$inferInsert
