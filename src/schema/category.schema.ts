@@ -1,11 +1,12 @@
 import { Static, t } from "elysia"
 
-const Category = t.Object({
+const Tag = t.Object({
     name: t.String(),
+    value: t.String()
 })
 
-export type categoryData = Static<typeof Category>
+export type tagData = Static<typeof Tag>
 
-export const categorySchema = {
-    Category
+export const tagSchema = {
+    Tag
 }

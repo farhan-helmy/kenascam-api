@@ -5,12 +5,16 @@ export const scams = sqliteTable('SCAM', {
     id: text('id').primaryKey(),
     name: text('name').notNull(),
     description: text('description'),
+    platform: text('platform'),
+    scammerInfo: text('scammerInfo'),
     isApproved: integer('isApproved', { mode: 'boolean' }).default(false),
+    createdAt: text('createdAt'),
+    updatedAt: text('updatedAt')
 })
 
 export const scamRelations = relations(scams, ({ many }) => ({
     images: many(images),
-    scamToCategories: many(scamToCategories),
+    scamToTags: many(scamToTags),
     comments: many(comments),
 }))
 
@@ -20,37 +24,54 @@ export const images = sqliteTable('IMAGE', {
     scamId: text('scamId').notNull().references(() => scams.id),
 })
 
-export const categories = sqliteTable('CATEGORY', {
+export const imageRelations = relations(images, ({ one }) => ({
+    scam: one(scams, {
+        fields: [images.scamId],
+        references: [scams.id],
+    }),
+}));
+
+export const tags = sqliteTable('TAGS', {
     id: text('id').primaryKey(),
-    name: text('name').notNull().unique(),
+    name: text('name').notNull(),
+    value: text('value').notNull().unique(),
 })
 
 export const comments = sqliteTable('COMMENT', {
     id: text('id').primaryKey(),
     nickname: text('nickname').notNull(),
     content: text('content').notNull(),
+    createdAt: text('createdAt'),
+    updatedAt: text('updatedAt'),
     scamId: text('scamId').notNull().references(() => scams.id),
 })
 
-export const categoriesRelations = relations(categories, ({ many }) => ({
-    scamToCategories: many(scamToCategories),
-}));
-
-export const scamToCategories = sqliteTable('SCAM_TO_CATEGORY', {
-    scamId: text('scamId').notNull().references(() => scams.id),
-    categoryId: text('categoryId').notNull().references(() => categories.id),
-}, (t) => ({
-    pk: primaryKey({ columns: [t.scamId, t.categoryId] }),
-}))
-
-export const scamToCategoriesRelations = relations(scamToCategories, ({ one }) => ({
+export const commentsRelations = relations(comments, ({ one }) => ({
     scam: one(scams, {
-        fields: [scamToCategories.scamId],
+        fields: [comments.scamId],
         references: [scams.id],
     }),
-    category: one(categories, {
-        fields: [scamToCategories.categoryId],
-        references: [categories.id],
+}));
+
+export const tagsRelations = relations(tags, ({ many }) => ({
+    scamToTags: many(scamToTags),
+}));
+
+export const scamToTags = sqliteTable('SCAM_TO_TAGS', {
+    scamId: text('scamId').notNull().references(() => scams.id),
+    tagId: text('tagId').notNull().references(() => tags.id),
+}, (t) => ({
+    pk: primaryKey({ columns: [t.scamId, t.tagId] }),
+}))
+
+export const scamToTagsRelations = relations(scamToTags, ({ one }) => ({
+    scam: one(scams, {
+        fields: [scamToTags.scamId],
+        references: [scams.id],
+    }),
+    tag: one(tags, {
+        fields: [scamToTags.tagId],
+        references: [tags.id],
     }),
 }));
 
@@ -61,7 +82,7 @@ export type InsertScam = typeof scams.$inferInsert
 export type SelectImage = typeof images.$inferSelect
 export type InsertImage = typeof images.$inferInsert
 
-export type SelectCategory = typeof categories.$inferSelect
-export type InsertCategory = typeof categories.$inferInsert
+export type SelectTag = typeof tags.$inferSelect
+export type InserTag = typeof tags.$inferInsert
 
 export type InsertComment = typeof comments.$inferInsert

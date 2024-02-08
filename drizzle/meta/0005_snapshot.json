@@ -1,0 +1,243 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "id": "d2a01640-2b61-4b47-ab89-467f6d7d9447",
+  "prevId": "912ea607-b0e4-4bd2-8e28-0adfbf2350a5",
+  "tables": {
+    "CATEGORY": {
+      "name": "CATEGORY",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "CATEGORY_name_unique": {
+          "name": "CATEGORY_name_unique",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "COMMENT": {
+      "name": "COMMENT",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nickname": {
+          "name": "nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "scamId": {
+          "name": "scamId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "COMMENT_scamId_SCAM_id_fk": {
+          "name": "COMMENT_scamId_SCAM_id_fk",
+          "tableFrom": "COMMENT",
+          "tableTo": "SCAM",
+          "columnsFrom": [
+            "scamId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "IMAGE": {
+      "name": "IMAGE",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "scamId": {
+          "name": "scamId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "IMAGE_scamId_SCAM_id_fk": {
+          "name": "IMAGE_scamId_SCAM_id_fk",
+          "tableFrom": "IMAGE",
+          "tableTo": "SCAM",
+          "columnsFrom": [
+            "scamId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "SCAM_TO_CATEGORY": {
+      "name": "SCAM_TO_CATEGORY",
+      "columns": {
+        "scamId": {
+          "name": "scamId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "categoryId": {
+          "name": "categoryId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "SCAM_TO_CATEGORY_scamId_SCAM_id_fk": {
+          "name": "SCAM_TO_CATEGORY_scamId_SCAM_id_fk",
+          "tableFrom": "SCAM_TO_CATEGORY",
+          "tableTo": "SCAM",
+          "columnsFrom": [
+            "scamId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "SCAM_TO_CATEGORY_categoryId_CATEGORY_id_fk": {
+          "name": "SCAM_TO_CATEGORY_categoryId_CATEGORY_id_fk",
+          "tableFrom": "SCAM_TO_CATEGORY",
+          "tableTo": "CATEGORY",
+          "columnsFrom": [
+            "categoryId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "SCAM_TO_CATEGORY_scamId_categoryId_pk": {
+          "columns": [
+            "categoryId",
+            "scamId"
+          ],
+          "name": "SCAM_TO_CATEGORY_scamId_categoryId_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "SCAM": {
+      "name": "SCAM",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "isApproved": {
+          "name": "isApproved",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

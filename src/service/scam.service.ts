@@ -3,15 +3,34 @@ import { InsertScam } from "../db/drizzle.schema";
 import { scamRepository } from "../repository/scam.repository";
 import { scamData, scamSchema } from "../schema/scam.schema";
 
+const getScam = async (id: string) => {
+    return await scamRepository.findFirst({id})
+}
+
+const getScams = async () => {
+    return await scamRepository.findMany()
+}
+
 const createScam = async (scamData: scamData) => {
     const scamCreateRes = await scamRepository.create({
         id: createId(),
         name: scamData.name,
         description: scamData.description,
-        isApproved: false
+        isApproved: false,
+        platform: scamData.platform,
+        scammerInfo: scamData.scammerInfo
     })
 
-    console.log(scamCreateRes)
+    const attachTagsRes = await scamRepository.attachTags({scamId: scamCreateRes[0].id, tagIds: scamData.tags.map(tag => tag.value)})
+
+    if (!scamData.fileKey) {
+        return scamCreateRes
+    }
+
+    const attachImagesRes = await scamRepository.attachImages({id: createId(), scamId: scamCreateRes[0].id, fileKeys: scamData.fileKey})
+
+    console.log(attachTagsRes)
+    console.log(attachImagesRes)
 
     return scamCreateRes
 
@@ -25,5 +44,7 @@ const createScam = async (scamData: scamData) => {
 }
 
 export const scamService = {
-    createScam
+    createScam,
+    getScams,
+    getScam
 }
