@@ -1,2 +1,0 @@
-ALTER TABLE SCAM ADD `createdAt` text DEFAULT 'CURRENT_TIMESTAMP';--> statement-breakpoint
-ALTER TABLE SCAM ADD `updatedAt` text DEFAULT 'CURRENT_TIMESTAMP';

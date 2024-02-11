@@ -69,8 +69,25 @@ const createScam = async (data: scamData) => {
     }
 }
 
+const vote = async ({ action, id }: { action: 'upvote' | 'downvote', id: string }) => {
+    try {
+
+        const res = 
+            action === 
+                'upvote' ? 
+                    await scamService.upvoteScam(id) 
+                        : 
+                    await scamService.downvoteScam(id)
+
+        return res
+    } catch (err) {
+        console.log(err)
+        return err
+    }
+}
 export const scamController = {
     createScam,
     getAllScams,
-    getScam
+    getScam,
+    vote,
 }

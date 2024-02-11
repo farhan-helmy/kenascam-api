@@ -1,1 +1,0 @@
-ALTER TABLE CATEGORY ADD `value` text NOT NULL;

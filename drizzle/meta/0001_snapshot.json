@@ -1,11 +1,11 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "a7a16026-e25d-43df-b1f0-7782ac2a71a0",
-  "prevId": "6fe4ca31-67c8-4c4e-91b3-b81fe55d0235",
+  "id": "e3a8b24c-c670-4ab4-9469-cceffce9054e",
+  "prevId": "2a227507-0680-45f2-a352-5c1036ec36c4",
   "tables": {
-    "CATEGORY": {
-      "name": "CATEGORY",
+    "COMMENT": {
+      "name": "COMMENT",
       "columns": {
         "id": {
           "name": "id",
@@ -14,24 +14,58 @@
           "notNull": true,
           "autoincrement": false
         },
-        "name": {
-          "name": "name",
+        "nickname": {
+          "name": "nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "scamId": {
+          "name": "scamId",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         }
       },
-      "indexes": {
-        "CATEGORY_name_unique": {
-          "name": "CATEGORY_name_unique",
-          "columns": [
-            "name"
+      "indexes": {},
+      "foreignKeys": {
+        "COMMENT_scamId_SCAM_id_fk": {
+          "name": "COMMENT_scamId_SCAM_id_fk",
+          "tableFrom": "COMMENT",
+          "tableTo": "SCAM",
+          "columnsFrom": [
+            "scamId"
           ],
-          "isUnique": true
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
-      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -72,11 +106,69 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "SCAM_TO_TAGS": {
+      "name": "SCAM_TO_TAGS",
+      "columns": {
+        "scamId": {
+          "name": "scamId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tagId": {
+          "name": "tagId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "SCAM_TO_TAGS_scamId_SCAM_id_fk": {
+          "name": "SCAM_TO_TAGS_scamId_SCAM_id_fk",
+          "tableFrom": "SCAM_TO_TAGS",
+          "tableTo": "SCAM",
+          "columnsFrom": [
+            "scamId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "SCAM_TO_TAGS_tagId_TAGS_id_fk": {
+          "name": "SCAM_TO_TAGS_tagId_TAGS_id_fk",
+          "tableFrom": "SCAM_TO_TAGS",
+          "tableTo": "TAGS",
+          "columnsFrom": [
+            "tagId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "SCAM_TO_TAGS_scamId_tagId_pk": {
+          "columns": [
+            "scamId",
+            "tagId"
+          ],
+          "name": "SCAM_TO_TAGS_scamId_tagId_pk"
+        }
+      },
       "uniqueConstraints": {}
     },
     "SCAM": {
@@ -103,6 +195,20 @@
           "notNull": false,
           "autoincrement": false
         },
+        "platform": {
+          "name": "platform",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "scammerInfo": {
+          "name": "scammerInfo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "isApproved": {
           "name": "isApproved",
           "type": "integer",
@@ -110,9 +216,77 @@
           "notNull": false,
           "autoincrement": false,
           "default": false
+        },
+        "upvotes": {
+          "name": "upvotes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 0
+        },
+        "downvotes": {
+          "name": "downvotes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 0
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "TAGS": {
+      "name": "TAGS",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "TAGS_value_unique": {
+          "name": "TAGS_value_unique",
+          "columns": [
+            "value"
+          ],
+          "isUnique": true
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}

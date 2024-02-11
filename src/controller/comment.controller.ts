@@ -2,7 +2,7 @@ import { commentData } from "../schema/comment.schema"
 import { commentService } from "../service/comment.service"
 import { logger } from "../utils/logger"
 
-const createScam = async (data: commentData) => {
+const createComment = async (data: commentData) => {
     try {
         // console.log(data)
         // console.log(name, description)
@@ -26,6 +26,6 @@ const createScam = async (data: commentData) => {
     }
 }
 
-export const scamController = {
-    createScam
+export const commentController = {
+    createComment
 }

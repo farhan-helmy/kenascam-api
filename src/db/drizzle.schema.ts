@@ -8,6 +8,8 @@ export const scams = sqliteTable('SCAM', {
     platform: text('platform'),
     scammerInfo: text('scammerInfo'),
     isApproved: integer('isApproved', { mode: 'boolean' }).default(false),
+    upvotes: integer('upvotes').default(0),
+    downvotes: integer('downvotes').default(0),
     createdAt: text('createdAt'),
     updatedAt: text('updatedAt')
 })
@@ -21,7 +23,7 @@ export const scamRelations = relations(scams, ({ many }) => ({
 export const images = sqliteTable('IMAGE', {
     id: text('id').primaryKey(),
     url: text('url').notNull(),
-    scamId: text('scamId').notNull().references(() => scams.id),
+    scamId: text('scamId').notNull().references(() => scams.id, { onDelete: 'cascade' }),
 })
 
 export const imageRelations = relations(images, ({ one }) => ({
@@ -43,7 +45,7 @@ export const comments = sqliteTable('COMMENT', {
     content: text('content').notNull(),
     createdAt: text('createdAt'),
     updatedAt: text('updatedAt'),
-    scamId: text('scamId').notNull().references(() => scams.id),
+    scamId: text('scamId').notNull().references(() => scams.id, { onDelete: 'cascade' }),
 })
 
 export const commentsRelations = relations(comments, ({ one }) => ({
@@ -58,8 +60,8 @@ export const tagsRelations = relations(tags, ({ many }) => ({
 }));
 
 export const scamToTags = sqliteTable('SCAM_TO_TAGS', {
-    scamId: text('scamId').notNull().references(() => scams.id),
-    tagId: text('tagId').notNull().references(() => tags.id),
+    scamId: text('scamId').notNull().references(() => scams.id, { onDelete: 'cascade' }),
+    tagId: text('tagId').notNull().references(() => tags.id, { onDelete: 'cascade' }),
 }, (t) => ({
     pk: primaryKey({ columns: [t.scamId, t.tagId] }),
 }))

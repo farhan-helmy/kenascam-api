@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import { db } from "../db/drizzle.db"
 import { InsertScam, images, scamToTags, scams } from "../db/drizzle.schema"
 import { eq } from 'drizzle-orm';
@@ -45,10 +46,43 @@ const attachTags = async ({ scamId, tagIds }: { scamId: string, tagIds: string[]
 
 const attachImages = async ({ id, scamId, fileKeys }: { id: string, scamId: string, fileKeys: string[] }) => {
     return await db.insert(images).values(fileKeys.map(fileKey => ({
-        id,
+        id: createId(),
         url: fileKey,
         scamId
     }))).returning()
+}
+
+const upvote = async ({ id }: { id: string }) => {
+
+    const scam = await db.query.scams.findFirst({
+        where: eq(scams.id, id),
+    })
+
+    // if (!scam?.upvotes) {
+    //     throw new Error("Scam not found")
+    // }
+    if (!scam){
+       throw new Error("Scam not found")
+    }
+
+    return await db.update(scams).set({
+        upvotes: scam.upvotes + 1
+    }).where(eq(scams.id, id)).returning()
+}
+
+const downvote = async ({ id }: { id: string }) => {
+
+    const scam = await db.query.scams.findFirst({
+        where: eq(scams.id, id),
+    })
+
+    if (!scam) {
+        throw new Error("Scam not found")
+    }
+
+    return await db.update(scams).set({
+        downvotes: scam.downvotes + 1
+    }).where(eq(scams.id, id)).returning()
 }
 
 export const scamRepository = {
@@ -56,5 +90,7 @@ export const scamRepository = {
     findFirst,
     create,
     attachTags,
-    attachImages
+    attachImages,
+    upvote,
+    downvote
 }

@@ -1,7 +1,7 @@
 import { db } from "../db/drizzle.db"
 import { tagRepository } from "../repository/tag.repository";
 import { createId } from "@paralleldrive/cuid2";
-import { tags } from "../db/drizzle.schema";
+import { comments, images, scamToTags, scams, tags } from "../db/drizzle.schema";
 
 
 const OPTIONS = [
@@ -104,10 +104,14 @@ const seedCategories = async () => {
 const clearAll = async () => {
   console.time('Delete')
 
-  const res = await db.delete(tags)
+  await db.delete(scams)
+  await db.delete(scamToTags)
+  await db.delete(tags)
+  await db.delete(images)
+  await db.delete(comments)
 
   console.timeEnd('Delete')
 }
 
-// clearAll()
+ //clearAll()
 seedCategories()

@@ -5,71 +5,15 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1706803682320,
-      "tag": "0000_true_lionheart",
+      "when": 1707453056655,
+      "tag": "0000_parched_sleeper",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1706882385481,
-      "tag": "0001_odd_azazel",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1706883414420,
-      "tag": "0002_gifted_magneto",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1707053075520,
-      "tag": "0003_wide_mephistopheles",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1707053096040,
-      "tag": "0004_thin_slayback",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1707054090252,
-      "tag": "0005_thin_scream",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1707273693688,
-      "tag": "0006_chilly_iron_lad",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "5",
-      "when": 1707274660198,
-      "tag": "0007_dark_trauma",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "5",
-      "when": 1707300471577,
-      "tag": "0008_shocking_rogue",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "5",
-      "when": 1707302669950,
-      "tag": "0009_romantic_odin",
+      "when": 1707528120987,
+      "tag": "0001_lyrical_iron_lad",
       "breakpoints": true
     }
   ]

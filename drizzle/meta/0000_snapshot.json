@@ -1,9 +1,74 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "6fe4ca31-67c8-4c4e-91b3-b81fe55d0235",
+  "id": "2a227507-0680-45f2-a352-5c1036ec36c4",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "COMMENT": {
+      "name": "COMMENT",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nickname": {
+          "name": "nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "scamId": {
+          "name": "scamId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "COMMENT_scamId_SCAM_id_fk": {
+          "name": "COMMENT_scamId_SCAM_id_fk",
+          "tableFrom": "COMMENT",
+          "tableTo": "SCAM",
+          "columnsFrom": [
+            "scamId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "IMAGE": {
       "name": "IMAGE",
       "columns": {
@@ -41,11 +106,69 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "SCAM_TO_TAGS": {
+      "name": "SCAM_TO_TAGS",
+      "columns": {
+        "scamId": {
+          "name": "scamId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tagId": {
+          "name": "tagId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "SCAM_TO_TAGS_scamId_SCAM_id_fk": {
+          "name": "SCAM_TO_TAGS_scamId_SCAM_id_fk",
+          "tableFrom": "SCAM_TO_TAGS",
+          "tableTo": "SCAM",
+          "columnsFrom": [
+            "scamId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "SCAM_TO_TAGS_tagId_TAGS_id_fk": {
+          "name": "SCAM_TO_TAGS_tagId_TAGS_id_fk",
+          "tableFrom": "SCAM_TO_TAGS",
+          "tableTo": "TAGS",
+          "columnsFrom": [
+            "tagId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "SCAM_TO_TAGS_scamId_tagId_pk": {
+          "columns": [
+            "scamId",
+            "tagId"
+          ],
+          "name": "SCAM_TO_TAGS_scamId_tagId_pk"
+        }
+      },
       "uniqueConstraints": {}
     },
     "SCAM": {
@@ -72,6 +195,20 @@
           "notNull": false,
           "autoincrement": false
         },
+        "platform": {
+          "name": "platform",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "scammerInfo": {
+          "name": "scammerInfo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "isApproved": {
           "name": "isApproved",
           "type": "integer",
@@ -79,6 +216,20 @@
           "notNull": false,
           "autoincrement": false,
           "default": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -86,13 +237,20 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "TAG": {
-      "name": "TAG",
+    "TAGS": {
+      "name": "TAGS",
       "columns": {
         "id": {
           "name": "id",
           "type": "text",
           "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
@@ -102,38 +260,18 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "label": {
-          "name": "label",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "scamId": {
-          "name": "scamId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
         }
       },
-      "indexes": {},
-      "foreignKeys": {
-        "TAG_scamId_SCAM_id_fk": {
-          "name": "TAG_scamId_SCAM_id_fk",
-          "tableFrom": "TAG",
-          "tableTo": "SCAM",
-          "columnsFrom": [
-            "scamId"
+      "indexes": {
+        "TAGS_value_unique": {
+          "name": "TAGS_value_unique",
+          "columns": [
+            "value"
           ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "isUnique": true
         }
       },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     }

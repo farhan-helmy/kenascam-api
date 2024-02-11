@@ -2,6 +2,7 @@ import { Elysia } from "elysia";
 import { scamRouter } from "./router/scam.router";
 import { imageRouter } from "./router/image.router";
 import { tagRouter } from "./router/tag.router";
+import { commentRouter } from "./router/comment.router";
 
 const app = new Elysia()
   .get('/', () => 'Ok')
@@ -13,6 +14,9 @@ const app = new Elysia()
   )
   .group('/tag', (app) =>
     app.use(tagRouter)
+  )
+  .group('/comment', (app) =>
+    app.use(commentRouter)
   )
   .listen(3001);
 
