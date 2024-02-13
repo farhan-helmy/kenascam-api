@@ -3,24 +3,24 @@ import { tagRepository } from "../repository/tag.repository";
 import { tagData } from "../schema/category.schema";
 
 const createTag = async (tagData: tagData) => {
-    const tagCreateRes = await tagRepository.create({
-        id: createId(),
-        name: tagData.name,
-        value: tagData.value
-    })
+  const tagCreateRes = await tagRepository.create({
+    id: createId(),
+    name: tagData.name,
+    value: tagData.value,
+  });
 
-    console.log(tagCreateRes)
+  //console.log(tagCreateRes);
 
-    return tagCreateRes
-}
+  return tagCreateRes;
+};
 
 const getAllTags = async () => {
-    const tags = await tagRepository.getAll()
+  const tags = await tagRepository.getAll();
 
-    return tags
-}
+  return tags;
+};
 
 export const tagService = {
-    createTag,
-    getAllTags
-}
+  createTag,
+  getAllTags,
+};

@@ -3,24 +3,24 @@ import { tagRepository } from "../repository/tag.repository";
 import { categoryData } from "../schema/category.schema";
 
 const createCategory = async (categoryData: categoryData) => {
-    const categoryCreateRes = await tagRepository.create({
-        id: createId(),
-        name: categoryData.name,
-        value: categoryData.value
-    })
+  const categoryCreateRes = await tagRepository.create({
+    id: createId(),
+    name: categoryData.name,
+    value: categoryData.value,
+  });
 
-    console.log(categoryCreateRes)
+  console.log(categoryCreateRes);
 
-    return categoryCreateRes
-}
+  return categoryCreateRes;
+};
 
 const getAllCategories = async () => {
-    const categories = await tagRepository.getAll()
+  const categories = await tagRepository.getAll();
 
-    return categories
-}
+  return categories;
+};
 
 export const categoryService = {
-    createCategory,
-    getAllCategories
-}
+  createCategory,
+  getAllCategories,
+};

@@ -63,7 +63,7 @@ const upvote = async ({ id }: { id: string }) => {
     // }
     if (!scam){
        throw new Error("Scam not found")
-    }
+    }w
 
     return await db.update(scams).set({
         upvotes: scam.upvotes + 1
