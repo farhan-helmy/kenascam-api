@@ -77,6 +77,8 @@ const vote = async ({
   id: string;
 }) => {
   try {
+    
+    console.log("Action vote", action)
     const res =
       action === "upvote"
         ? await scamService.upvoteScam(id)
