@@ -1,7 +1,7 @@
 import { createId } from "@paralleldrive/cuid2";
 import { db } from "../db/drizzle.db"
 import { InsertScam, images, scamToTags, scams } from "../db/drizzle.schema"
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 
 const findMany = async () => {
     return await db.query.scams.findMany({
@@ -9,7 +9,8 @@ const findMany = async () => {
             images: true,
             comments: true,
             scamToTags: true
-        }
+        },
+        orderBy: [desc(scams.createdAt)]
     })
 }
 
@@ -18,7 +19,9 @@ const findFirst = async ({ id }: { id: string }) => {
         where: eq(scams.id, id),
         with: {
             images: true,
-            comments: true,
+            comments: {
+                orderBy: [desc(scams.createdAt)]
+            },
             scamToTags: true
         }
     })

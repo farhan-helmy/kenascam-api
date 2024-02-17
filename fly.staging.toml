@@ -1,16 +1,12 @@
-# fly.toml app configuration file generated for kenascam-api-production-1 on 2024-02-16T17:49:24+08:00
+# fly.toml app configuration file generated for kenascam-api on 2024-02-13T14:42:19+08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'kenascam-api-production-1'
+app = 'kenascam-api'
 primary_region = 'hkg'
 
 [build]
-
-[env]
-  TURSODB_TOKEN = ''
-  TURSODB_URL = ''
 
 [http_service]
   internal_port = 3001
