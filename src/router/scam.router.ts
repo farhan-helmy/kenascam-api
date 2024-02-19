@@ -34,4 +34,19 @@ export const scamRouter = new Elysia()
   )
   .post("/", ({ body }) => scamController.createScam(body), {
     body: scamSchema.Scam,
+  })
+  .post("/:id/remove", ({ params, body }) => {
+   
+    if (body.adminSecret !== process.env.KENASCAM_ADMIN_SECRET) {
+      return {
+        status: 401,
+        message: "Unauthorized"
+      }
+    }
+
+    scamController.deleteScam(params.id)
+  }, {
+    body: t.Object({
+      adminSecret: t.String()
+    })
   });

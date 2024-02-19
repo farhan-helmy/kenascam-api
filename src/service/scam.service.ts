@@ -33,6 +33,10 @@ const createScam = async (scamData: scamData) => {
 
 }
 
+const deleteScam = async (id: string) => {
+    return await scamRepository.remove({ id })
+}
+
 const upvoteScam = async (id: string) => {
     return await scamRepository.upvote({ id })
 }
@@ -46,5 +50,6 @@ export const scamService = {
     getScams,
     getScam,
     upvoteScam,
-    downvoteScam
+    downvoteScam,
+    deleteScam
 }

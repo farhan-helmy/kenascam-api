@@ -40,6 +40,10 @@ const create = async (scam: InsertScam) => {
     }).returning()
 }
 
+const remove = async ({ id }: { id: string }) => {
+    return await db.delete(scams).where(eq(scams.id, id)).returning()
+}
+
 const attachTags = async ({ scamId, tagIds }: { scamId: string, tagIds: string[] }) => {
     return await db.insert(scamToTags).values(tagIds.map(tagId => ({
         scamId,
@@ -92,5 +96,6 @@ export const scamRepository = {
     attachTags,
     attachImages,
     upvote,
-    downvote
+    downvote,
+    remove
 }

@@ -46,8 +46,6 @@ const getAllScams = async () => {
 
 const createScam = async (data: scamData) => {
   try {
-    // console.log(data)
-    // console.log(name, description)
     const resScam = await scamService.createScam({
       name: data.name,
       description: data.description,
@@ -56,8 +54,6 @@ const createScam = async (data: scamData) => {
       platform: data.platform,
       scammerInfo: data.scammerInfo,
     });
-
-    //console.log(resScam);
 
     return {
       status: 201,
@@ -69,6 +65,22 @@ const createScam = async (data: scamData) => {
   }
 };
 
+const deleteScam = async (id: string) => {
+  console.log("Delete scam", id)
+  try {
+    const res = await scamService.deleteScam(id);
+    console.log(res)
+    return {
+      status: 200,
+      message: "Deleted",
+    };
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+
+}
+
 const vote = async ({
   action,
   id,
@@ -77,7 +89,7 @@ const vote = async ({
   id: string;
 }) => {
   try {
-    
+
     console.log("Action vote", action)
     const res =
       action === "upvote"
@@ -96,4 +108,5 @@ export const scamController = {
   getAllScams,
   getScam,
   vote,
+  deleteScam
 };
