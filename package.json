@@ -6,6 +6,7 @@
     "dev": "bun --env-file=.env.local run --watch src/index.ts",
     "generate": "drizzle-kit generate:sqlite",
     "migrate": "bun src/db/migrate.ts",
+    "migrate:prod": "bun --env-file=.env.prod src/db/migrate.ts",
     "seed": "bun run src/script/seeder.ts"
   },
   "dependencies": {

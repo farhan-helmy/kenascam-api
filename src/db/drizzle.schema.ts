@@ -11,7 +11,8 @@ export const scams = sqliteTable('SCAM', {
     upvotes: integer('upvotes').default(0),
     downvotes: integer('downvotes').default(0),
     createdAt: text('createdAt'),
-    updatedAt: text('updatedAt')
+    updatedAt: text('updatedAt'),
+    test: text('test'),
 })
 
 export const scamRelations = relations(scams, ({ many }) => ({

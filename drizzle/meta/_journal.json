@@ -15,6 +15,13 @@
       "when": 1707528120987,
       "tag": "0001_lyrical_iron_lad",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1708152437358,
+      "tag": "0002_flaky_cerebro",
+      "breakpoints": true
     }
   ]
 }

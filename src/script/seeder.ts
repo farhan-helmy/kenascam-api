@@ -18,11 +18,13 @@ const OPTIONS = [
   { label: 'Crypto', value: 'crypto' },
   { label: 'Saham', value: 'saham' },
   { label: 'Car', value: 'car' },
-  { label: 'Religion', value:'religion'},
+  { label: 'Religion', value: 'religion' },
   { label: 'Catfish', value: 'catfish' },
   { label: 'Love', value: 'love' },
   { label: 'Royalty', value: 'royalty' },
   { label: 'Porn', value: 'porn' },
+  { label: 'Parcel Delivery', value: 'parcel-delivery' },
+  { label: 'Renovation', value: 'renovation' },
   { label: 'Spam', value: 'spam' },
   { label: 'Deepfake', value: 'deepfake' },
   { label: 'Pharming', value: 'pharming' },
@@ -30,8 +32,9 @@ const OPTIONS = [
   { label: 'Mule Account', value: 'mule-account' },
   { label: 'Casino', value: 'casino' },
   { label: 'Gamble', value: 'gamble' },
+  { label: 'Online Auction', value: 'online-action' },
   { label: 'Advance Fee', value: 'advance-fee' },
-  { label: 'Smartphone', value: 'smartphone' },
+  { label: 'Smartphone', value: 'smartphone' }, 
   { label: 'False  Tech Support', value :'false-tech-support'}, 
   { label: 'Property Rental', value :'property-rental'},
   { label: 'Smartphone', value: 'smartphone' },
@@ -80,7 +83,11 @@ const OPTIONS = [
   { label: 'Online Extortion', value: 'online-extortion' },
   { label: 'Quid Pro Quo', value: 'quid-pro-quo' },
   { label: 'Charity', value: 'charity' },
-  { label: 'Gold', value: 'gold' }
+  { label: 'Gold', value: 'gold' },
+  { label: 'Vehicle', value: 'vehicle' },
+  { label: 'Employment', value: 'employment'},
+  { label: 'Forex', value: 'forex' },
+  { label: 'Trading', value: 'trading' },
 ];
 
 
