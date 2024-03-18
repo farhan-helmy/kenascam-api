@@ -12,7 +12,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.481.0",
     "@aws-sdk/lib-storage": "^3.481.0",
-    "@elysiajs/bearer": "^0.8.0",
+    "@elysiajs/bearer": "^1.0.2",
     "@elysiajs/cookie": "^0.8.0",
     "@elysiajs/cors": "^0.8.0",
     "@elysiajs/eden": "^0.8.0",
